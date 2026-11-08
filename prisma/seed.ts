@@ -16,7 +16,7 @@ const PRODUCTS = [
     description:
       "The C41 QS is Cavliwireless's flagship GPS/IoT tracker, built for rapid deployment across fleet and logistics operations. It reports location, motion, and diagnostic events over cellular with minimal setup.",
     category: "GPS/IoT Tracker",
-    heroImageUrl: "/products/hubble-c41-qs.svg",
+    heroImageUrl: "/products/hubble-c41-qs.jpg",
     modelUrl: HUBBLE_MODEL_URL,
     features: [
       "Multi-constellation GNSS (GPS, GLONASS, Galileo)",
@@ -32,7 +32,7 @@ const PRODUCTS = [
     description:
       "A low-power cellular module designed to drop into existing hardware designs, giving any device reliable LTE connectivity with a minimal board footprint.",
     category: "Connectivity Module",
-    heroImageUrl: "/products/hubble-c100.svg",
+    heroImageUrl: "/products/hubble-c100.jpg",
     modelUrl: HUBBLE_MODEL_URL,
     features: [
       "LTE Cat-1 connectivity",
@@ -48,7 +48,7 @@ const PRODUCTS = [
     description:
       "Aggregates data from nearby sensors and trackers over BLE/LoRa and forwards it upstream over cellular or Ethernet, with on-device buffering for unreliable links.",
     category: "Gateway",
-    heroImageUrl: "/products/hubble-edge-gateway.svg",
+    heroImageUrl: "/products/hubble-edge-gateway.jpg",
     modelUrl: HUBBLE_MODEL_URL,
     features: [
       "BLE + LoRa sensor aggregation",
@@ -64,7 +64,7 @@ const PRODUCTS = [
     description:
       "Combines temperature, humidity, shock, and tilt sensing into a single rugged unit, reporting conditions in real time for cold-chain and asset-monitoring use cases.",
     category: "Sensor Hardware",
-    heroImageUrl: "/products/hubble-sensor-hub.svg",
+    heroImageUrl: "/products/hubble-sensor-hub.jpg",
     modelUrl: HUBBLE_MODEL_URL,
     features: [
       "Temperature + humidity sensing",
@@ -80,7 +80,7 @@ const PRODUCTS = [
     description:
       "An in-cabin unit that surfaces live vehicle and fleet telemetry to drivers, pairing with Hubble trackers and sensors over Bluetooth for at-a-glance status.",
     category: "Fleet Management",
-    heroImageUrl: "/products/hubble-fleet-dashboard.svg",
+    heroImageUrl: "/products/hubble-fleet-dashboard.jpg",
     modelUrl: HUBBLE_MODEL_URL,
     features: [
       "In-cabin live telemetry display",

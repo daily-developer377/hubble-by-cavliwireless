@@ -89,17 +89,36 @@ export function SlotPicker({
 
   return (
     <div className="space-y-6">
+      {/* Wizard Step 2 Header */}
+      <div className="mb-6 flex items-center justify-between border-b border-stone-200/80 pb-4">
+        <div>
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#183B2B]">
+            Step 2 of 2
+          </span>
+          <h3 className="text-base font-semibold text-slate-900">
+            Select Your Convenient Time Slot
+          </h3>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Times displayed in {DISPLAY_ZONE}
+          </p>
+        </div>
+        <div className="flex items-center gap-1.5" aria-hidden="true">
+          <span className="h-2 w-2 rounded-full bg-emerald-500" />
+          <span className="h-2 w-6 rounded-full bg-[#183B2B]" />
+        </div>
+      </div>
+
       <InlineError message={errorMessage} />
       {Array.from(byDay.entries()).map(([day, daySlots]) => (
         <div key={day}>
-          <p className="mb-2 text-sm font-medium text-slate-700">{day}</p>
-          <div className="flex flex-wrap gap-2">
+          <p className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-slate-700">{day}</p>
+          <div className="flex flex-wrap gap-2.5">
             {daySlots.map((slot) => (
               <button
                 key={slot.start}
                 type="button"
                 onClick={() => onSelect(slot)}
-                className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 transition hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-700"
+                className="rounded-xl border border-stone-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-700 transition-all hover:border-[#183B2B] hover:bg-[#183B2B]/5 hover:text-[#183B2B] hover:shadow-2xs active:scale-95 cursor-pointer"
               >
                 {DateTime.fromISO(slot.start).setZone(DISPLAY_ZONE).toFormat("h:mm a")}
               </button>

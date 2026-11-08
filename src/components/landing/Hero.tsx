@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { LuArrowRight } from "react-icons/lu";
 import { ModelViewer } from "@/components/product/ModelViewer";
 
 const b2bCapabilities = [
@@ -231,9 +232,10 @@ export function Hero() {
                         </p>
                         <Link
                           href={pin.href}
-                          className="mt-2 inline-flex items-center gap-1 text-[11px] font-medium text-[#183B2B] hover:underline"
+                          className="group mt-2 inline-flex items-center gap-1 text-[11px] font-medium text-[#183B2B] hover:underline"
                         >
-                          Learn more →
+                          <span>Learn more</span>
+                          <LuArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                         </Link>
                       </div>
                     )}
@@ -328,10 +330,11 @@ export function Hero() {
               </span>
               <Link
                 href="/products/hubble-c41-qs"
-                className="rounded-lg bg-[#183B2B] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#132F22]"
+                className="group inline-flex items-center gap-1.5 rounded-lg bg-[#183B2B] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#132F22]"
                 onClick={() => setShow3DModal(false)}
               >
-                Go to Product Page →
+                <span>Go to Product Page</span>
+                <LuArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
           </div>
