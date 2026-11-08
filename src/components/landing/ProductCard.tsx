@@ -26,14 +26,14 @@ export function ProductCard({ product }: { product: Product }) {
         />
       </div>
       <div className="flex flex-1 flex-col gap-2 p-5">
-        <span className="text-xs font-medium tracking-wide text-indigo-600 uppercase">
+        <span className="text-xs font-semibold tracking-wider text-[#183B2B] uppercase">
           {product.category}
         </span>
-        <h3 className="text-lg font-semibold text-slate-900">{product.name}</h3>
-        <p className="text-sm text-slate-500">{product.tagline}</p>
-        <span className="mt-auto flex items-center gap-1 pt-3 text-sm font-medium text-slate-900">
-          View product
-          <span className="transition group-hover:translate-x-0.5">→</span>
+        <h3 className="text-lg font-semibold text-slate-900 group-hover:text-[#183B2B] transition-colors">{product.name}</h3>
+        <p className="text-sm text-slate-500 leading-relaxed">{product.tagline}</p>
+        <span className="mt-auto flex items-center gap-1.5 pt-3 text-sm font-semibold text-[#183B2B]">
+          View details
+          <span className="transition duration-200 group-hover:translate-x-1">→</span>
         </span>
       </div>
     </Link>

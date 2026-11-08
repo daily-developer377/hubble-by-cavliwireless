@@ -27,6 +27,11 @@ export function ConsultForm({
 
   function update<K extends keyof typeof fields>(key: K, value: string) {
     setFields((prev) => ({ ...prev, [key]: value }));
+    setFieldErrors((prev) => {
+      if (!prev[key]) return prev;
+      const { [key]: _removed, ...rest } = prev;
+      return rest;
+    });
   }
 
   async function handleSubmit(event: React.FormEvent) {
@@ -128,7 +133,7 @@ export function ConsultForm({
       <button
         type="submit"
         disabled={submitting}
-        className="rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-slate-800 disabled:opacity-60"
+        className="rounded-lg bg-[#183B2B] px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-[#132F22] disabled:opacity-60"
       >
         {submitting ? "Submitting…" : "Continue to pick a time"}
       </button>

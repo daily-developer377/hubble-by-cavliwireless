@@ -35,7 +35,7 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <div className="w-full px-6 sm:px-10 lg:px-14 xl:px-16 py-12">
       <Link
         href="/"
         className="inline-flex items-center gap-1 text-sm text-slate-500 transition hover:text-slate-900"

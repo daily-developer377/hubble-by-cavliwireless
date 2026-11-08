@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { confirmBookingSchema } from "@/lib/validation";
 import { createMeetEvent } from "@/lib/calendar";
-import { sendConfirmationEmail } from "@/lib/email";
+import { sendConfirmationEmail, sendAdminNotificationEmail } from "@/lib/email";
 import { getConsultTimezone } from "@/lib/slots";
 
 export async function POST(
@@ -72,7 +72,7 @@ export async function POST(
     timezone,
   });
 
-  const emailStatus = await sendConfirmationEmail({
+  const confirmationEmailInput = {
     to: consultRequest.email,
     name: consultRequest.name,
     phone: consultRequest.phone ?? "",
@@ -81,7 +81,12 @@ export async function POST(
     timezone,
     meetLink: meetEvent.meetLink,
     message: consultRequest.message,
-  });
+  };
+
+  const emailStatus = await sendConfirmationEmail(confirmationEmailInput);
+  // Sent independently of the client email above so a business-owner
+  // notification still goes out even when that one fails to send.
+  await sendAdminNotificationEmail(confirmationEmailInput);
 
   const [updatedBooking] = await prisma.$transaction([
     prisma.booking.update({
