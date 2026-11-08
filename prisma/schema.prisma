@@ -1,0 +1,150 @@
+// Prisma schema for the Hubble landing page + exhibitor scraper.
+// See README.md "Database schema" section for the 3NF design rationale.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// --- Task 1: Hubble product catalog -----------------------------------
+
+model Product {
+  id           String           @id @default(cuid())
+  slug         String           @unique
+  name         String
+  tagline      String
+  description  String
+  heroImageUrl String
+  modelUrl     String
+  category     String
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  features     ProductFeature[]
+}
+
+model ProductFeature {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  label     String
+  sortOrder Int     @default(0)
+
+  @@index([productId])
+}
+
+// --- Task 1: Consult Now / Google Meet booking flow ---------------------
+
+enum ConsultStatus {
+  PENDING
+  SLOT_SELECTED
+  CONFIRMED
+  CANCELLED
+}
+
+model ConsultRequest {
+  id        String        @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  message   String
+  status    ConsultStatus @default(PENDING)
+  booking   Booking?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+enum ExternalMode {
+  REAL
+  MOCK
+}
+
+enum EmailStatus {
+  SENT
+  FAILED
+  LOGGED
+}
+
+model Booking {
+  id               String         @id @default(cuid())
+  consultRequestId String         @unique
+  consultRequest   ConsultRequest @relation(fields: [consultRequestId], references: [id], onDelete: Cascade)
+  slotStart        DateTime       @unique
+  slotEnd          DateTime
+  timezone         String         @default("Asia/Kolkata")
+  googleEventId    String?
+  googleMeetLink   String?
+  calendarMode     ExternalMode   @default(MOCK)
+  emailStatus      EmailStatus    @default(LOGGED)
+  createdAt        DateTime       @default(now())
+}
+
+// --- Task 2: Exhibitor scraper ------------------------------------------
+
+model Exhibition {
+  id         String           @id @default(cuid())
+  portalSlug String
+  name       String
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  booths     ExhibitorBooth[]
+
+  @@unique([portalSlug, name])
+}
+
+model Exhibitor {
+  id             String           @id @default(cuid())
+  mmiExhibitorId String?          @unique
+  normalizedKey  String
+  companyName    String
+  country        String
+  logoUrl        String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  booths         ExhibitorBooth[]
+
+  // Fallback lookup only (used when mmiExhibitorId is unavailable) — not
+  // unique, since two distinct real-world companies can share an identical
+  // normalized name+country (confirmed scraping the live catalogue). The
+  // true identity and dedup key is mmiExhibitorId; see README "Database
+  // schema" for the full rationale.
+  @@index([normalizedKey])
+}
+
+model ExhibitorBooth {
+  id           String     @id @default(cuid())
+  exhibitorId  String
+  exhibitor    Exhibitor  @relation(fields: [exhibitorId], references: [id], onDelete: Cascade)
+  exhibitionId String
+  exhibition   Exhibition @relation(fields: [exhibitionId], references: [id], onDelete: Cascade)
+  hallNo       String
+  boothNo      String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([exhibitionId, boothNo])
+}
+
+enum ScrapeStatus {
+  RUNNING
+  SUCCESS
+  FAILED
+}
+
+// A partial unique index on (status) WHERE status = 'RUNNING' is added by
+// migration 20261107040000_scraperun_single_running — Prisma's schema DSL
+// has no syntax for partial indexes, so it isn't declared here, but it's
+// what makes POST /api/scrape/exhibitors safe against concurrent triggers
+// (see src/app/api/scrape/exhibitors/route.ts).
+model ScrapeRun {
+  id                 String       @id @default(cuid())
+  startedAt          DateTime     @default(now())
+  finishedAt         DateTime?
+  status             ScrapeStatus @default(RUNNING)
+  pagesScraped       Int          @default(0)
+  exhibitorsUpserted Int          @default(0)
+  errorMessage       String?
+}

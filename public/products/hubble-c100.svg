@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Hubble C100 Cellular Module">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#g2)"/>
+  <rect x="240" y="150" width="160" height="110" rx="10" fill="none" stroke="#a78bfa" stroke-width="4"/>
+  <circle cx="270" cy="175" r="6" fill="#a78bfa"/>
+  <circle cx="370" cy="175" r="6" fill="#a78bfa"/>
+  <circle cx="270" cy="235" r="6" fill="#a78bfa"/>
+  <circle cx="370" cy="235" r="6" fill="#a78bfa"/>
+  <path d="M320 150 V100 M300 100 L320 70 L340 100" fill="none" stroke="#a78bfa" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="320" y="420" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="28" font-weight="600">Hubble C100 Cellular Module</text>
+</svg>

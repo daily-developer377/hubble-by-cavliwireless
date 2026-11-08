@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Hubble Sensor Hub">
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#g4)"/>
+  <circle cx="320" cy="210" r="70" fill="none" stroke="#fb923c" stroke-width="4"/>
+  <path d="M320 150 V130 M320 270 V290 M260 210 H240 M380 210 H400 M278 168 L264 154 M362 168 L376 154 M278 252 L264 266 M362 252 L376 266" stroke="#fb923c" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="320" cy="210" r="18" fill="#fb923c"/>
+  <text x="320" y="420" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="28" font-weight="600">Hubble Sensor Hub</text>
+</svg>
