@@ -1,4 +1,4 @@
-# Hubble Landing Page + Exhibitor Scraper
+# Hubble Landing Page
 
 A full-stack project for Cavliwireless: a Next.js landing page for the "Hubble" product line (with a real 3D model viewer and a complete Consult Now / Google Meet booking flow), and a Playwright-based scraper that pulls exhibitor data from a live third-party catalogue into the same Postgres database.
 
